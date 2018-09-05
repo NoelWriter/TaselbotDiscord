@@ -9,24 +9,24 @@ The prefix of the bot is ">" so commands will work something like this:
 Most commands have options that have to be filled, like the Ban command requires a username and a reason specified.
 
 ### Admin Commands
-Ban 
-Kick 
-Mute 
-Status 
-Purge 
-Invite 
-Nsfwstatus
+>Ban 
+>Kick 
+>Mute 
+>Status 
+>Purge 
+>Invite 
+>Nsfwstatus
 ### Fun Commands
-Meow 
-Woof 
-Insult 
-Congratulations 
-Advice 
-Sog 
-8Ball 
-Cyka
+>Meow 
+>Woof 
+>Insult 
+>Congratulations 
+>Advice 
+>Sog 
+>8Ball 
+>Cyka
 ### Other useful
-Crypto
+>Crypto
 ### NSFW
-Rule34 
-E621
+>Rule34 
+>E621
