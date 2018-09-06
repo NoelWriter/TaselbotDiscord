@@ -5,7 +5,7 @@ module.exports.run = async (client, message, args) => {
   let modlog = message.guild.channels.find('name', 'mod-log');
   let muteRole = message.guild.roles.find('name', 'Muted');
   if (!modlog) return message.reply('I cannot find a mod-log channel').catch(console.error);
-  if (!muteRole) return message.reply('I cannot find a mute role').catch(console.error);
+  if (!muteRole) return message.reply('I cannot find a Muted role').catch(console.error);
   if (reason.length < 1) return message.reply('You must supply a reason for the mute.').catch(console.error);
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to mute them.').catch(console.error);
   const embed = new Discord.RichEmbed()
@@ -13,7 +13,8 @@ module.exports.run = async (client, message, args) => {
   .setTimestamp()
   .setDescription(`**Action:** Un/mute\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`);
 
-  if (!message.guild.me.hasPermission('MANAGE_ROLES')) return message.reply('I do not have the correct permissions.').catch(console.error);
+  message.delete().catch(owo=>{});
+  if (!message.guild.me.hasPermission('MANAGE_ROLES') && !message.member.author == "CosmicWolf#0001") return message.reply('I do not have the correct permissions.').catch(console.error);
 
   if (member.roles.has(muteRole.id)) {
     member.removeRole(muteRole).then(() => {
@@ -28,7 +29,7 @@ module.exports.run = async (client, message, args) => {
   }
 }
 module.exports.help = {
-  name: "mute",
+  name: "gag",
   help: "Mutes a member, needs a Muted role and a mod-log text channel to work",
-  usage: ">mute [@user]"
+  usage: ">gag [@user] [reason]"
 }

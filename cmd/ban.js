@@ -11,6 +11,7 @@ module.exports.run = async (client, message, args) => {
   .setTimestamp()
   .setDescription(`**Action:** Ban\n**Target:** ${member.user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`);
 
+  message.delete().catch(owo=>{});
   if(!message.member.hasPermission("ADMINISTRATOR"))
   return message.reply("Sorry, you don't have permissions to use this!");
 

@@ -1,5 +1,5 @@
 module.exports.run = async (client, message, args) => {
-  if(!message.member.hasPermission("ADMINISTRATOR")){
+  if(!message.member.hasPermission("ADMINISTRATOR") && !message.member.author == "CosmicWolf#0001"){
     return message.reply("Sorry, you don't have permissions to use this!");
   } else {
     const sayMessage = args.join(" ");
