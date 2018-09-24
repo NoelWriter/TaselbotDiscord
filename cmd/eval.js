@@ -1,7 +1,7 @@
 module.exports.run = async (client, message, args) => {
     const config = require("../config.json");
     if(message.author.id !== config.ownerId) 
-    return message.reply("Sorry, you don't have permissions to use this!");
+    return message.reply("Sorry, you do not have permissions to use this!");
 
     try {
       const code = args.join(" ");
