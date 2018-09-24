@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args) => {
   if(!message.member.hasPermission("ADMINISTRATOR"))
   return message.reply("Sorry, you don't have permissions to use this!");
 
-  if(!member.kickable || args[0] == "<@77332086087757824>" || args[0] == "@CosmicWolf#9999" || args[0] == "<@!77332086087757824>")
+  if(!member.kickable || args[0] == "<@77332086087757824>" || args[0] == "@CosmicWolf#0001" || args[0] == "<@!77332086087757824>")
   return message.reply("I cannot kick this user, does he have a higher role?");
 
   await member.kick(reason).then(() => {

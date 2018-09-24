@@ -99,7 +99,13 @@ bot.on("message", async message => {
       });
     }
   } else {
-    if(cmd){ cmd.run(bot, message, args); } else { console.log("not a command!")}
+    if(cmd){ 
+      cmd.run(bot, message, args)
+      .catch(console.error); 
+      console.log(message.author.id + " " + message.author.username + " used command " + command); 
+    } else { 
+      console.log("not a command!")
+    }
   }
 
 

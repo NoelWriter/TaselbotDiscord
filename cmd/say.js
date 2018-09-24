@@ -1,6 +1,10 @@
 module.exports.run = async (client, message, args) => {
-  if(!message.member.hasPermission("ADMINISTRATOR") && !message.member.author == "CosmicWolf#0001"){
+  const config = require("../config.json");
+    if(message.author.id !== config.ownerId) 
     return message.reply("Sorry, you don't have permissions to use this!");
+  if(!message.member.hasPermission("ADMINISTRATOR")){
+    return message.reply("Sorry, you don't have permissions to use this!");
+
   } else {
     const sayMessage = args.join(" ");
     message.delete().catch(owo=>{});
