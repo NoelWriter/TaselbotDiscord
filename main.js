@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 const config = require("./config.json");
+const mutelist = require("./mutes.json");
 const embed = new Discord.RichEmbed();
 const randomCat = require('random.cat.js');
 const randomCatApi = randomCat.api();
@@ -34,11 +35,29 @@ fs.readdir("./cmd/", (err, files) => {
 
 bot.on("ready", () => {
   console.log(`Bot has started, with ${bot.users.size} users, in ${bot.channels.size} channels of ${bot.guilds.size} guilds.`);
-  bot.user.setActivity(`with CosmicWolf#0001, Use >help for help`);
+  bot.user.setActivity(`with CosmicWolf#0001, >help`);
+  console.log(
+    mutelist.mutedIds.forEach(
+      element => {
+        console.log(element);
+      }
+    )
+  );
 });
 
 bot.on("message", async message => {
   if(message.author.bot) return;
+
+
+  mutelist.mutedIds.forEach(element => {
+    if(message.author.id == element){
+      message.delete().catch(owo=>{});
+      console.log("message catched from " + message.author.username);
+      return;
+    }
+  });
+  
+
   if(message.content.indexOf(config.prefix) !== 0) return;
 
   const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -107,73 +126,6 @@ bot.on("message", async message => {
       console.log("not a command!")
     }
   }
-
-
-//
-//   if(command === "kick") {
-//     if(!message.member.hasPermission("ADMINISTRATOR"))
-//       return message.reply("Sorry, you don't have permissions to use this!");
-//
-//     let member = message.mentions.members.first();
-//     if(!member)
-//       return message.reply("*uwu*, twat ish no wember sawwy");
-//     if(!member.kickable || args[0] == "<@77332086087757824>" || args[0] == "@CosmicWolf#9999" || args[0] == "<@!77332086087757824>")
-//       return message.reply("I canno kiwk twis uwuser. Dos hew havwe a hiwwer rowole?");
-//
-//     let reason = args.slice(1).join(' ');
-//     if(!reason)
-//       return message.reply("Pwease indicwate a weason fur the kwick!");
-//
-//     await member.kick(reason)
-//       .catch(error => message.reply(`Sowwy dwady ${message.author} I culd no kwick becwause of : ${error}`));
-//     message.reply(`*notices viowolation*. ${member.user.tag} has been kwicked by ${message.author.tag} becwause: ${reason}`);
-//
-//   }
-//
-//   if(command === "ban") {
-//     if(!message.member.hasPermission("ADMINISTRATOR"))
-//       return message.reply("Sorry, you don't have permissions to use this!");
-//
-//     let member = message.mentions.members.first();
-//     if(!member)
-//       return message.reply("*uwu*, That's no member");
-//     if(!member.bannable || args[0] == "<@77332086087757824>" || args[0] == "@CosmicWolf#9999" || args[0] == "<@!77332086087757824>")
-//       return message.reply("I can't ban this user. Does he have a higher role?");
-//
-//     let reason = args.slice(1).join(' ');
-//     if(!reason)
-//       return message.reply("Please indicate a reason for the ban");
-//
-//     await member.ban(reason)
-//       .catch(error => message.reply(`Sorry daddy ${message.author} I couldn't ban this user because of : ${error}`));
-//     message.reply(`*notices viowolation*. ${member.user.tag} has been banned by ${message.author.tag} becwause: ${reason}`);
-//   }
-//
-//   if(command === "woof") {
-//     request("http://random.dog/woof", function (error, response, body) {
-//         if (!error && response.statusCode == 200) {
-//             if (typeof (body) != "undefined") {
-//                 message.channel.send("http://random.dog/" + body);
-//               } else {
-//                 message.channel.send("Things are going wrong all over.");
-//               }
-//         } else {
-//           message.channel.send(error);
-//         }
-//     });
-//   }
-//
-//   if(command === "meow") {
-//     randomCatApi.getCat().then((cat) => message.channel.send(cat.file))
-//   }
-//
-//   if(command === "sog") {
-//     message.channel.send(`Studie Ontwijkend Gedrag Inbound`, {
-//       files: [
-//         "./assets/SOG_2.gif"
-//       ]
-//     })
-//   }
 });
 
 bot.login(config.token);
