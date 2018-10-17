@@ -1,13 +1,13 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 const config = require("./config.json");
-const mutelist = require("./mutes.json");
 const embed = new Discord.RichEmbed();
 const randomCat = require('random.cat.js');
 const randomCatApi = randomCat.api();
 const fs = require('fs');
+const path = require("path");
+
 bot.commands = new Discord.Collection();
-bot.mutes = require("./mutes.json");
 
 try {
     var request = require("request");
@@ -36,20 +36,14 @@ fs.readdir("./cmd/", (err, files) => {
 bot.on("ready", () => {
   console.log(`Bot has started, with ${bot.users.size} users, in ${bot.channels.size} channels of ${bot.guilds.size} guilds.`);
   bot.user.setActivity(`with CosmicWolf#0001, >help`);
-  console.log(
-    mutelist.mutedIds.forEach(
-      element => {
-        console.log(element);
-      }
-    )
-  );
 });
 
 bot.on("message", async message => {
   if(message.author.bot) return;
 
-
-  mutelist.mutedIds.forEach(element => {
+  var data = fs.readFileSync(path.resolve(__dirname, "./mutes.json"));
+  var json = JSON.parse(data);
+  json.mutedIds.forEach(element => {
     if(message.author.id == element){
       message.delete().catch(owo=>{});
       console.log("message catched from " + message.author.username);
