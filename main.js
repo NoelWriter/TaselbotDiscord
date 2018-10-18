@@ -45,8 +45,8 @@ bot.on("message", async message => {
   var json = JSON.parse(data);
   json.mutedIds.forEach(element => {
     if(message.author.id == element){
-      message.delete().catch(owo=>{});
       console.log("message catched from " + message.author.username);
+      message.delete().catch(owo=>{});
       return;
     }
   });
