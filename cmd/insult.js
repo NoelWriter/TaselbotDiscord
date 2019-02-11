@@ -1,4 +1,5 @@
 module.exports.run = async (client, message, args) => {
+  const superagent = require('superagent');
   superagent.get('http://quandyfactory.com/insult/json/')
   .end((err, res) => {
     if (!err && res.status === 200) {
